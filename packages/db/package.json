@@ -21,6 +21,10 @@
     "./supabase/server": {
       "types": "./src/supabase/server.ts",
       "default": "./src/supabase/server.ts"
+    },
+    "./supabase/admin": {
+      "types": "./src/supabase/admin.ts",
+      "default": "./src/supabase/admin.ts"
     }
   },
   "scripts": {

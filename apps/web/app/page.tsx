@@ -1,27 +1,28 @@
-import { Settings } from "lucide-react";
 import { AppHeader } from "@/components/home/app-header";
 import { GlanceCard } from "@/components/home/glance-card";
 import { LifeWheel } from "@/components/home/life-wheel";
 import { TodayLabel } from "@/components/home/today-label";
+import { getCurrentProfile } from "@/server/profile";
 
-export default function HomePage() {
+// Reads the session cookie, so it must render per-request.
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const profile = await getCurrentProfile();
+  const user = profile
+    ? { name: profile.fullName ?? profile.email, plan: profile.plan }
+    : null;
+
   return (
     <div className="min-h-screen bg-[#f5efe3]">
-      <AppHeader userName="Raj Patel" />
+      <AppHeader user={user} />
 
-      <main className="mx-auto max-w-6xl px-6 py-8">
+      <main className="mx-auto max-w-6xl px-6 pb-8 pt-4">
         <div className="flex items-center justify-between">
           <TodayLabel />
-          <button
-            type="button"
-            aria-label="Dashboard settings"
-            className="text-[#8a7d6c] transition-colors hover:text-[#4a4036]"
-          >
-            <Settings className="h-5 w-5" strokeWidth={1.75} />
-          </button>
         </div>
 
-        <div className="mt-8 grid items-center gap-10 lg:grid-cols-2">
+        <div className="mt-4 grid items-center gap-10 lg:grid-cols-2">
           <div className="flex justify-center">
             <LifeWheel />
           </div>

@@ -1,4 +1,7 @@
-import { Compass, Eye, LogOut, Settings, Sparkles, Triangle } from "lucide-react";
+import { type Plan } from "@lifeos/contracts";
+import { Compass, Eye, Sparkles, Triangle } from "lucide-react";
+import Link from "next/link";
+import { UserMenu } from "./user-menu";
 
 const NAV = [
   { label: "Discover", Icon: Eye },
@@ -8,19 +11,24 @@ const NAV = [
 ] as const;
 
 export interface AppHeaderProps {
-  userName: string;
+  /** The signed-in user, or `null` when not authenticated. */
+  user: { name: string; plan: Plan } | null;
 }
 
 /** Top navigation shell shown across the authenticated app. */
-export function AppHeader({ userName }: AppHeaderProps) {
+export function AppHeader({ user }: AppHeaderProps) {
   return (
     <header className="w-full bg-[#efe7d6]">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         {/* Brand mark */}
         <div className="flex items-center">
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#c1623a]">
+          <Link
+            href="/"
+            aria-label="Home"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#c1623a] transition-opacity hover:opacity-90"
+          >
             <span className="h-2.5 w-2.5 rounded-full bg-[#fbf8f1]" />
-          </span>
+          </Link>
         </div>
 
         {/* Primary nav */}
@@ -38,15 +46,16 @@ export function AppHeader({ userName }: AppHeaderProps) {
         </nav>
 
         {/* User + actions */}
-        <div className="flex items-center gap-4 text-[#6f6152]">
-          <span className="text-[15px]">{userName}</span>
-          <button type="button" aria-label="Sign out" className="hover:text-[#4a4036]">
-            <LogOut className="h-4 w-4" strokeWidth={1.75} />
-          </button>
-          <button type="button" aria-label="Settings" className="hover:text-[#4a4036]">
-            <Settings className="h-5 w-5" strokeWidth={1.75} />
-          </button>
-        </div>
+        {user ? (
+          <UserMenu name={user.name} plan={user.plan} />
+        ) : (
+          <Link
+            href="/login"
+            className="text-[15px] font-medium text-[#c1623a] hover:text-[#a9412a]"
+          >
+            Sign in
+          </Link>
+        )}
       </div>
     </header>
   );

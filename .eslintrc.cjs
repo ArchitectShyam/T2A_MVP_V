@@ -155,5 +155,10 @@ module.exports = {
     "coverage/",
     "**/*.d.ts",
     "supabase/",
+    // Generated service worker (serwist) — not hand-authored source.
+    "**/public/sw.js",
+    "**/public/swe-worker-*.js",
+    // Local dev launcher (Node ESM script, not part of the app source).
+    "apps/web/scripts/",
   ],
 };

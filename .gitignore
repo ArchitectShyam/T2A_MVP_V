@@ -31,3 +31,6 @@ blob-report/
 apps/web/public/sw.js
 apps/web/public/sw.js.map
 apps/web/public/swe-worker-*.js
+
+# local corporate CA bundle (machine-specific TLS-inspection workaround)
+certs/

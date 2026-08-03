@@ -29,3 +29,15 @@ export function getServerEnv(): ServerEnv {
   }
   return cached;
 }
+
+/**
+ * The public Supabase credentials needed for auth. Unlike {@link getServerEnv}
+ * this does not require DATABASE_URL and returns `null` (instead of throwing)
+ * when Supabase is not configured — so pages can render on a fresh checkout.
+ */
+export function getSupabaseEnv(): { url: string; anonKey: string } | null {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !anonKey) return null;
+  return { url, anonKey };
+}
