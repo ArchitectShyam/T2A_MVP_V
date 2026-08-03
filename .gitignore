@@ -1,0 +1,33 @@
+node_modules/
+dist/
+.next/
+.turbo/
+coverage/
+out/
+build/
+
+# env
+.env
+.env.local
+.env*.local
+
+# supabase local
+supabase/.branches/
+supabase/.temp/
+
+# misc
+.DS_Store
+*.log
+.vscode/*
+!.vscode/extensions.json
+
+# playwright
+test-results/
+playwright-report/
+blob-report/
+.playwright/
+
+# serwist / generated service worker
+apps/web/public/sw.js
+apps/web/public/sw.js.map
+apps/web/public/swe-worker-*.js

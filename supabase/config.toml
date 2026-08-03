@@ -1,0 +1,40 @@
+# Local Supabase configuration for LifeOS.
+# Regenerate/upgrade with `supabase init` if your CLI version needs newer keys.
+
+project_id = "lifeos"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 15
+
+# Supavisor transaction pooler. The app connects through this (see DATABASE_URL).
+[db.pooler]
+enabled = true
+port = 6543
+pool_mode = "transaction"
+default_pool_size = 20
+max_client_conn = 100
+
+[studio]
+enabled = true
+port = 54323
+
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["http://localhost:3000"]
+jwt_expiry = 3600
+enable_signup = true
+
+[auth.email]
+enable_signup = true
+# Auto-confirm sign-ups locally so the E2E flow can create users without email.
+enable_confirmations = false
