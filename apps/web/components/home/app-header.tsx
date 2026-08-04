@@ -5,8 +5,8 @@ import { UserMenu } from "./user-menu";
 
 const NAV = [
   { label: "Discover", Icon: Eye, href: "/discover" },
-  { label: "Align", Icon: Triangle, href: null },
-  { label: "Navigate", Icon: Compass, href: null },
+  { label: "Align", Icon: Triangle, href: "/align" },
+  { label: "Navigate", Icon: Compass, href: "/navigate" },
   { label: "Evolve", Icon: Sparkles, href: null },
 ] as const;
 
