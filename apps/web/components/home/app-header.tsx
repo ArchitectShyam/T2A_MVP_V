@@ -4,10 +4,10 @@ import Link from "next/link";
 import { UserMenu } from "./user-menu";
 
 const NAV = [
-  { label: "Discover", Icon: Eye },
-  { label: "Align", Icon: Triangle },
-  { label: "Navigate", Icon: Compass },
-  { label: "Evolve", Icon: Sparkles },
+  { label: "Discover", Icon: Eye, href: "/discover" },
+  { label: "Align", Icon: Triangle, href: null },
+  { label: "Navigate", Icon: Compass, href: null },
+  { label: "Evolve", Icon: Sparkles, href: null },
 ] as const;
 
 export interface AppHeaderProps {
@@ -33,16 +33,27 @@ export function AppHeader({ user }: AppHeaderProps) {
 
         {/* Primary nav */}
         <nav className="hidden items-center gap-9 sm:flex">
-          {NAV.map(({ label, Icon }) => (
-            <button
-              key={label}
-              type="button"
-              className="flex items-center gap-2 text-[15px] text-[#6f6152] transition-colors hover:text-[#4a4036]"
-            >
-              <Icon className="h-4 w-4" strokeWidth={1.75} />
-              {label}
-            </button>
-          ))}
+          {NAV.map(({ label, Icon, href }) =>
+            href ? (
+              <Link
+                key={label}
+                href={href}
+                className="flex items-center gap-2 text-[15px] text-[#6f6152] transition-colors hover:text-[#4a4036]"
+              >
+                <Icon className="h-4 w-4" strokeWidth={1.75} />
+                {label}
+              </Link>
+            ) : (
+              <button
+                key={label}
+                type="button"
+                className="flex items-center gap-2 text-[15px] text-[#6f6152] transition-colors hover:text-[#4a4036]"
+              >
+                <Icon className="h-4 w-4" strokeWidth={1.75} />
+                {label}
+              </button>
+            ),
+          )}
         </nav>
 
         {/* User + actions */}
